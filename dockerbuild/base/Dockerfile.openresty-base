@@ -1,0 +1,17 @@
+#licycle/lua-resty-busted-test-base:1.0
+FROM openresty/openresty:1.21.4.1-1-alpine-fat
+
+RUN mkdir -p /var/log/nginx
+
+COPY dockerbuild/base/luarocks-3.9.1.tar.gz /root/
+RUN tar zxpf /root/luarocks-3.9.1.tar.gz
+RUN ls
+RUN cd /luarocks-3.9.1 && ./configure --prefix=/usr/local/openresty/luajit \
+    --with-lua=/usr/local/openresty/luajit/ \
+    --lua-suffix=jit \
+    --with-lua-include=/usr/local/openresty/luajit/include/luajit-2.1 && make build && make install
+RUN luarocks install lua-resty-http
+
+RUN ln -sf /dev/stdout /var/log/nginx/access.log && \
+    ln -sf /dev/stderr /var/log/nginx/error.log
+

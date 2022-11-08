@@ -1,0 +1,6 @@
+FROM licycle/lua-resty-busted-test-base:1.0
+
+# install busted
+RUN luarocks install busted
+
+WORKDIR /root

@@ -10,7 +10,7 @@ To pull docker needed
 bash pull.sh
 ```
 
-## 目录说明
+## Project File
 ```
 .
 ├── README.md
